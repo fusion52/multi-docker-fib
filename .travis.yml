@@ -15,7 +15,7 @@ after_success:
   - docker build -t fusion52/multi-docker-fib-worker ./worker
   # Login into the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take those images and push them to docker hub
+  # Take those images and push them to Docker Hub
   - docker push fusion52/multi-docker-fib-client
   - docker push fusion52/multi-docker-fib-nginx
   - docker push fusion52/multi-docker-fib-server
