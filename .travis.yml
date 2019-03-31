@@ -20,3 +20,16 @@ after_success:
   - docker push fusion52/multi-docker-fib-nginx
   - docker push fusion52/multi-docker-fib-server
   - docker push fusion52/multi-docker-fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-docker-fib'
+  env: 'MultiDockerFib-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-559681517647'
+  bucket_path: 'multi-docker-fib'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
