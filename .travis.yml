@@ -1,12 +1,15 @@
+language: generic 
 sudo: required
 services:
   - docker
-
+ 
 before_install:
+  # using the dev version because the prod version does not allow for testing
   - docker build -t "$DOCKER_ID"/multi-docker-fib -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run "$DOCKER_ID"/multi-docker-fib npm run test -- --coverage
+  # - docker run "$DOCKER_ID"/multi-docker-fib npm run test -- --coverage
+  - docker run -e CI=true fusion52/multi-docker-fib npm test
 
 after_success:
   - docker build -t "$DOCKER_ID"/multi-docker-fib-client:latest ./client
